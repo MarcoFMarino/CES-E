@@ -17,9 +17,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
-
 [node name="HUD" parent="." instance=ExtResource( 2 )]
 
 [node name="Point" type="TextureRect" parent="."]
@@ -36,5 +33,24 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[node name="PointTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="LevelTimer" type="Timer" parent="."]
+wait_time = 15.0
+one_shot = true
+
+[node name="WordsTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="CueTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="end" from="HUD" to="." method="_end_test"]
 [connection signal="start" from="HUD" to="." method="_on_HUD_start"]
+[connection signal="timeout" from="PointTimer" to="." method="_on_PointTimer_timeout"]
+[connection signal="timeout" from="LevelTimer" to="." method="_on_LevelTimer_timeout"]
+[connection signal="timeout" from="WordsTimer" to="." method="_on_WordsTimer_timeout"]
+[connection signal="timeout" from="CueTimer" to="." method="_on_CueTimer_timeout"]
