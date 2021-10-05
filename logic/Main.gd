@@ -42,11 +42,12 @@ func _on_PointTimer_timeout():
 	$CueTimer.start() # Iniciar el temporizador para mostrar el CUE
 	
 func _end_test(): # Almacenar los resultados en un .csv
+	key = false # Deshabilitar la respuesta del usuario
 	file.open("res://files/results.csv", File.WRITE)
 	for i in results:
 		file.store_csv_line(i)
 	file.close()
-	get_tree().quit()
+	$HUD.menu()
 
 func _level_update():
 	key = false # Deshabilitar la respuesta del usuario

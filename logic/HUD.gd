@@ -6,6 +6,14 @@ signal end # Señal para indicar que se decidió terminar el test antes de compl
 func _ready():
 	$EndTest.hide()
 	reset_words() # Ocultar el cue y las palabras al iniciar el test
+	
+func menu():
+	$EndTest.hide()
+	hide_words()
+	$Message.show() # Ocultar elementos correspondientes al menú principal
+	$Start.show()
+	$Exit.show()
+	$Logo.show()
 
 func _on_Exit_pressed():
 	get_tree().quit() # Cerrar el CES-E
@@ -32,11 +40,17 @@ func show_message(message): # Permite mostrar al usuario mensajes en el centro d
 	$Message.text = message
 	$Message.show()
 
+func hide_message():
+	$Message.hide()
+
 func _on_EndTest_pressed(): # Al presionar el botón EndTest envía la señal "end"
 	emit_signal("end")
 	
 func show_words(): # Hace visibles los elementos pertencientes al grupo "Words": Cue, Word1, Word2, Word3
 	get_tree().call_group("Words", "show")
+
+func hide_words():
+		get_tree().call_group("Words", "hide")
 
 func reset_words(): # Establecer el texto de Cue, Word1, Word2 y Word3 como texto vacío
 	$Cue.text = ""
