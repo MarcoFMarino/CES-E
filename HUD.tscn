@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://files/Archivo-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://logic/HUD.gd" type="Script" id=2]
@@ -22,21 +22,9 @@ bg_color = Color( 0.678431, 0.180392, 0.27451, 1 )
 size = 24
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=6]
 size = 22
 font_data = ExtResource( 1 )
-
-[sub_resource type="InputEventAction" id=9]
-action = "ui_start"
-
-[sub_resource type="ShortCut" id=10]
-shortcut = SubResource( 9 )
-
-[sub_resource type="InputEventAction" id=6]
-action = "ui_start"
-
-[sub_resource type="ShortCut" id=7]
-shortcut = SubResource( 6 )
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 2 )
@@ -184,7 +172,7 @@ margin_left = 131.639
 margin_top = 83.4365
 margin_right = 971.639
 margin_bottom = 669.437
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 6 )
 text = "Bienvenido/a a este experimento. En la pantalla verás una palabra a la izquierda y tres palabras a la derecha. La palabra de la izquierda, que está sola, es la palabra clave. Tu tarea es escoger cuál de las tres palabras que están a la derecha, es la más próxima a la palabra clave teniendo en cuenta su significado. Es decir, cuál tiene mayor relación, en función de lo que significan. Las tres palabras para elegir aparecen en una columna. Si te parece que es la de arriba. presioná la tecla \"g\". Si crees que la más relacionada es la del medio, apretá 'h'. Y si te parece que la palabra clave se relaciona más con la de abajo, presioná 'j'. Una de las tres es más cercana, fue medido mediante técnicas específicas.
 
 ¡GRACIAS POR PARTICIPAR!"
@@ -202,8 +190,7 @@ margin_left = -74.7905
 margin_top = -143.599
 margin_right = 45.2095
 margin_bottom = -108.599
-custom_fonts/font = SubResource( 8 )
-shortcut = SubResource( 10 )
+custom_fonts/font = SubResource( 6 )
 text = "Comenzar"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -218,7 +205,7 @@ margin_left = -170.5
 margin_top = -19.5
 margin_right = 170.5
 margin_bottom = 19.5
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 6 )
 clear_button_enabled = true
 script = ExtResource( 4 )
 __meta__ = {
@@ -230,8 +217,7 @@ margin_left = 347.0
 margin_top = 2.0
 margin_right = 413.0
 margin_bottom = 25.0
-custom_fonts/font = SubResource( 8 )
-shortcut = SubResource( 7 )
+custom_fonts/font = SubResource( 6 )
 text = "Aceptar"
 __meta__ = {
 "_edit_use_anchors_": false
