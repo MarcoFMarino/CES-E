@@ -1,5 +1,6 @@
 extends Node
 
+
 var file = File.new()
 var elements = [] # Variable utilizada para cargar todos los eventos desde el .csv 
 var target # Registra el target del evento actual 
@@ -7,10 +8,16 @@ var words # Palabras a mostrar durante el evento
 var cue # Palabra clave
 var key # Variable para habilitar o deshabilitar la utilización del teclado para responder al test
 var event = 0 
-var results = [["EVENT", "CUE", "G", "H", "J", "CHOICE", "TARGET", "ACC"]]
+var kcue
+var ktarget 
+var kdist_1 
+var kdist_2
+var results = [["EVENT", "CUE", "G", "H", "J", "CHOICE", "TARGET", "ACC", "RT(Seg)", "KCUE", "KTARGET", "KDIST1", "KDIST2"]]
+
 
 func _ready():
 	$Point.hide()
+
 
 func _on_HUD_start(): # Recibe la señal start del HUD
 	randomize()
@@ -23,31 +30,38 @@ func _on_HUD_start(): # Recibe la señal start del HUD
 	file.close()
 	_level_update() # Carga los datos del primer evento del test
 
+
 func _on_CueTimer_timeout():
 	$HUD.update_cue(cue) # Mostrar el CUE correspondiente al evento actual
 	$Point.hide()
 	$WordsTimer.start() # Incia el timer para mostrar las palabras
+
 
 func _on_WordsTimer_timeout():
 	$HUD.update_words(words) # Mostrar palabras correspondientes al evento actual
 	$LevelTimer.start() # Inicia el temporizador del evento
 	key = true # Al mostrar las opciones se habilita la respuesta del usuario
 
+
 func _on_LevelTimer_timeout():
 	_results("TimeOut")
 	_level_update() # Se pasa automáticamente al siguiente evento si no se responde dentro de 15 seg
 
+
 func _on_PointTimer_timeout():
 	$Point.show() # Luego de 0.5seg de empezar el evento se muestra el Point
 	$CueTimer.start() # Iniciar el temporizador para mostrar el CUE
-	
+
+
 func _end_test(): # Almacenar los resultados en un .csv
 	key = false # Deshabilitar la respuesta del usuario
-	file.open("res://files/results.csv", File.WRITE)
+	var date = String(OS.get_datetime()["year"]) + "-" + String(OS.get_datetime()["month"]) + "-" + String(OS.get_datetime()["day"])
+	file.open("res://results/" + date + "-" + $HUD.get_name() + ".csv", File.WRITE)
 	for i in results:
 		file.store_csv_line(i)
 	file.close()
 	$HUD.menu()
+
 
 func _level_update():
 	key = false # Deshabilitar la respuesta del usuario
@@ -62,6 +76,10 @@ func _level_update():
 		cue = elements[level][1]
 		target = elements[level][2]
 		words = [elements[level][2], elements[level][3], elements[level][4]]
+		kcue = elements[level][5]
+		ktarget = elements[level][6]
+		kdist_1 = elements[level][7]
+		kdist_2 = elements[level][8]
 		
 		words.shuffle() # Mezcla el orden de las palabras, de lo contrario el target siempre estaría en la tecla "g"
 		
@@ -75,9 +93,10 @@ func _results(answer):
 	var acc = 0
 	if answer == target: # Compureba que la respuesta seleccionada sea correcta
 		acc = 1
-	results.append([event, cue, words[0], words[1], words[2], answer, target, acc]) # Agrega el resultado correspondiente al evento que finalizó
+	results.append([event, cue, words[0], words[1], words[2], answer, target, acc, 15 - $LevelTimer.time_left, kcue, ktarget, kdist_1, kdist_2]) # Agrega el resultado correspondiente al evento que finalizó
 
-func _process(delta):
+
+func _process(_delta):
 	if key:
 		if Input.is_action_just_pressed("word_1"):
 			_results(words[0]) # Indica que se presionó la tecla "g"
@@ -88,5 +107,3 @@ func _process(delta):
 		elif Input.is_action_just_pressed("word_3"):
 			_results(words[2]) # Indica que se presionó la tecla "j"
 			_level_update() # Avanza al siguiente evento
-
-

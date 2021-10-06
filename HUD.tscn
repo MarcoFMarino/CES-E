@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://files/Archivo-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://logic/HUD.gd" type="Script" id=2]
 [ext_resource path="res://images/logo.png" type="Texture" id=3]
+[ext_resource path="res://logic/UserName.gd" type="Script" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -20,6 +21,22 @@ bg_color = Color( 0.678431, 0.180392, 0.27451, 1 )
 [sub_resource type="DynamicFont" id=5]
 size = 24
 font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 22
+font_data = ExtResource( 1 )
+
+[sub_resource type="InputEventAction" id=9]
+action = "ui_start"
+
+[sub_resource type="ShortCut" id=10]
+shortcut = SubResource( 9 )
+
+[sub_resource type="InputEventAction" id=6]
+action = "ui_start"
+
+[sub_resource type="ShortCut" id=7]
+shortcut = SubResource( 6 )
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 2 )
@@ -161,6 +178,69 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Instructions" type="Label" parent="."]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = 131.639
+margin_top = 83.4365
+margin_right = 971.639
+margin_bottom = 669.437
+custom_fonts/font = SubResource( 8 )
+text = "Bienvenido/a a este experimento. En la pantalla verás una palabra a la izquierda y tres palabras a la derecha. La palabra de la izquierda, que está sola, es la palabra clave. Tu tarea es escoger cuál de las tres palabras que están a la derecha, es la más próxima a la palabra clave teniendo en cuenta su significado. Es decir, cuál tiene mayor relación, en función de lo que significan. Las tres palabras para elegir aparecen en una columna. Si te parece que es la de arriba. presioná la tecla \"g\". Si crees que la más relacionada es la del medio, apretá 'h'. Y si te parece que la palabra clave se relaciona más con la de abajo, presioná 'j'. Una de las tres es más cercana, fue medido mediante técnicas específicas.
+
+¡GRACIAS POR PARTICIPAR!"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ready" type="Button" parent="Instructions"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -74.7905
+margin_top = -143.599
+margin_right = 45.2095
+margin_bottom = -108.599
+custom_fonts/font = SubResource( 8 )
+shortcut = SubResource( 10 )
+text = "Comenzar"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UserName" type="LineEdit" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -170.5
+margin_top = -19.5
+margin_right = 170.5
+margin_bottom = 19.5
+custom_fonts/font = SubResource( 8 )
+clear_button_enabled = true
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Enter" type="Button" parent="UserName"]
+margin_left = 347.0
+margin_top = 2.0
+margin_right = 413.0
+margin_bottom = 25.0
+custom_fonts/font = SubResource( 8 )
+shortcut = SubResource( 7 )
+text = "Aceptar"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="Exit" to="." method="_on_Exit_pressed"]
 [connection signal="pressed" from="EndTest" to="." method="_on_EndTest_pressed"]
+[connection signal="pressed" from="Instructions/Ready" to="." method="_on_Ready_pressed"]
+[connection signal="name" from="UserName" to="." method="_set_name"]
+[connection signal="text_entered" from="UserName" to="UserName" method="_on_UserName_text_entered"]
+[connection signal="pressed" from="UserName/Enter" to="." method="_set_name"]
