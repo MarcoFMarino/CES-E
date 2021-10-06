@@ -9,6 +9,7 @@ var _user_name = "noname"
 
 
 func _ready():
+	get_tree().call_group("guides", "hide")
 	$EndTest.hide()
 	$UserName.hide()
 	$Instructions.hide()
@@ -16,6 +17,7 @@ func _ready():
 
 
 func menu():
+	get_tree().call_group("guides", "hide")
 	$EndTest.hide()
 	hide_words()
 	$Message.show() # Mostrar elementos correspondientes al menú principal
@@ -39,6 +41,7 @@ func _on_Start_pressed():
 func _on_Ready_pressed():
 	$Instructions.hide()
 	$EndTest.show() # Mostrar los elementos correspondientes de la interfaz del test
+	get_tree().call_group("guides", "show")
 	show_words()
 	emit_signal("start") # Emitir señal de inicio
 

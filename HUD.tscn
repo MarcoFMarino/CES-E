@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://files/Archivo-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://logic/HUD.gd" type="Script" id=2]
 [ext_resource path="res://images/logo.png" type="Texture" id=3]
 [ext_resource path="res://logic/UserName.gd" type="Script" id=4]
+[ext_resource path="res://images/box.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -166,7 +167,83 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="G" type="Label" parent="." groups=[
+"guides",
+]]
+modulate = Color( 0, 0, 0, 1 )
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -440.0
+margin_top = -100.0
+margin_bottom = -180.0
+custom_fonts/font = SubResource( 5 )
+text = "G"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BoxG" type="TextureRect" parent="G"]
+margin_left = -10.0
+margin_top = -1.68182
+margin_right = 169.011
+margin_bottom = 175.318
+rect_scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 5 )
+
+[node name="H" type="Label" parent="." groups=[
+"guides",
+]]
+modulate = Color( 0, 0, 0, 1 )
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -440.0
+margin_top = -7.0
+margin_bottom = 7.0
+custom_fonts/font = SubResource( 5 )
+text = "H"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BoxH" type="TextureRect" parent="H"]
+margin_left = -10.0
+margin_top = -3.36743
+margin_right = 167.459
+margin_bottom = 173.633
+rect_scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 5 )
+
+[node name="J" type="Label" parent="." groups=[
+"guides",
+]]
+modulate = Color( 0, 0, 0, 1 )
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -440.0
+margin_top = 100.0
+margin_bottom = 100.0
+custom_fonts/font = SubResource( 5 )
+text = "J"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="J"]
+margin_left = -10.0
+margin_top = -2.0
+margin_right = 40.0
+margin_bottom = 40.0
+rect_scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 5 )
+
 [node name="Instructions" type="Label" parent="."]
+visible = false
 self_modulate = Color( 0, 0, 0, 1 )
 margin_left = 131.639
 margin_top = 83.4365
@@ -197,6 +274,7 @@ __meta__ = {
 }
 
 [node name="UserName" type="LineEdit" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
